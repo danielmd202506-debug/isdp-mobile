@@ -28,6 +28,7 @@
     .tabs{height:68px;background:#fff;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(5,1fr);padding-bottom:env(safe-area-inset-bottom)}.tab{border:0;background:#fff;color:#6b7280;display:grid;justify-items:center;align-content:center;gap:3px;font-size:11px}.tab i{font-style:normal;font-size:22px}.tab.active{color:var(--adm-color-primary);font-weight:800}
     .sync-panel{display:grid;gap:8px}.sync-row{display:flex;justify-content:space-between;align-items:center;background:#f8fafc;border-radius:10px;padding:9px 10px;font-size:13px}.sync-row b{color:#1677ff}
     .cost-row{display:grid;grid-template-columns:1fr auto;gap:8px;padding:10px 0;border-bottom:1px solid var(--line)}.cost-row:last-child{border-bottom:0}.amount{font-weight:900}.doc{display:flex;align-items:center;gap:10px;padding:12px;border:1px solid var(--line);border-radius:12px;margin-bottom:8px;background:#fff}.doc i{font-style:normal;font-size:24px}.hidden{display:none}
+    [data-action]{cursor:pointer}.pressable:active,.item:active,.task:active,.doc:active,.cost-row:active,.q:active{transform:scale(.985);opacity:.88}.toast{position:absolute;left:50%;bottom:92px;transform:translateX(-50%);max-width:86%;padding:10px 14px;border-radius:999px;background:rgba(17,24,39,.92);color:#fff;font-size:13px;z-index:20;box-shadow:0 10px 30px rgba(0,0,0,.24)}.sheet-mask{position:absolute;inset:0;background:rgba(15,23,42,.42);z-index:18;display:grid;align-items:end}.sheet{background:#fff;border-radius:18px 18px 0 0;padding:16px 14px 22px;max-height:72vh;overflow:auto}.sheet h3{margin:0 0 8px;font-size:18px}.sheet p{margin:0 0 12px;color:var(--weak);font-size:13px}.sheet-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.detail-list{display:grid;gap:8px;margin-top:10px}.detail-list div{display:flex;justify-content:space-between;background:#f8fafc;border-radius:10px;padding:9px 10px;font-size:13px}.detail-list b{color:#111827}.mini-tabs{display:flex;gap:8px;overflow:auto;margin:8px 0 12px}.mini-tabs button{border:0;border-radius:999px;background:#eef4ff;color:#1677ff;padding:7px 11px;font-weight:800}.mini-tabs button.active{background:#1677ff;color:#fff}
     @media(max-width:360px){.metrics{grid-template-columns:repeat(2,1fr)}.quick{grid-template-columns:repeat(4,1fr);gap:6px}.q i{width:38px;height:38px}.phone{height:100vh}}
   </style>
 </head>
@@ -60,7 +61,7 @@ const pages={
       <div class="metric"><span>在管项目</span><b>18</b><em>+2 本周</em></div><div class="metric"><span>逾期里程碑</span><b>5</b><em style="color:#ff3141">需处理</em></div><div class="metric"><span>待审批</span><b>26</b><em>批量处理</em></div>
       <div class="metric"><span>EHS隐患</span><b>8</b><em style="color:#ff8f1f">高风险 2</em></div><div class="metric"><span>成本超支</span><b>3</b><em style="color:#ff3141">红色预警</em></div><div class="metric"><span>今日到期</span><b>11</b><em>站点任务</em></div>
     </div></section>
-    <section class="card"><div class="section-title"><h2>快捷入口</h2><a>全部</a></div><div class="quick"><div class="q"><i>▤</i><span>周报</span></div><div class="q"><i>!</i><span>风险</span></div><div class="q"><i>⌕</i><span>巡检</span></div><div class="q"><i>☑</i><span>审批</span></div></div></section>
+    <section class="card"><div class="section-title"><h2>快捷入口</h2><a data-action="more" data-title="快捷入口">全部</a></div><div class="quick"><div class="q" data-action="weekly"><i>▤</i><span>周报</span></div><div class="q" data-action="risk"><i>!</i><span>风险</span></div><div class="q" data-action="switch" data-target="field"><i>⌕</i><span>巡检</span></div><div class="q" data-action="approve"><i>☑</i><span>审批</span></div></div></section>
     <section class="card"><div class="section-title"><h2>重点项目</h2><a>筛选</a></div><div class="project">
       ${project('沙特 Riyadh 数据中心交付','执行中','S级','82%',82,'green','待处理问题 4 / 里程碑 2天后到期')}
       ${project('Dubai Core Site 扩容','验收中','A级','64%',64,'warn','EHS 整改 2 / 验收材料待补齐')}
@@ -74,7 +75,7 @@ const pages={
       ${task('扫码核验','设备条码 / OCR 到货核验','⌗')}${task('现场留痕','拍照/视频自动加水印','◉')}${task('EHS巡检','标准检查表与隐患上报','!')}${task('问题工单','语音录入，派单闭环','☷')}${task('变更管理','客户签字，线上审批','✎')}${task('交付验收','资料上传，证书生成','☑')}
     </div></section>
     <section class="card"><div class="section-title"><h2>站点任务核查</h2><a>WBS同步</a></div><div class="list">${item('Riyadh-DC-01 设备上架','计划 80% / 实际 75%，需补现场照片','','▣')}${item('Dubai-Site-B 清关确认','物料到货状态待扫码核验','','⌗')}${item('Jeddah-POP 电源测试','今日 18:00 前提交日报','','◷')}</div></section>
-    <section class="card"><div class="section-title"><h2>新建现场问题</h2></div><div class="form-row"><label>问题类型</label><input class="input" value="质量 / 安装规范" /></div><div class="form-row"><label>问题描述</label><textarea class="textarea">现场走线与图纸不一致，已拍照留痕。</textarea></div><button class="btn">提交并派单</button></section>`
+    <section class="card"><div class="section-title"><h2>新建现场问题</h2></div><div class="form-row"><label>问题类型</label><input class="input" value="质量 / 安装规范" /></div><div class="form-row"><label>问题描述</label><textarea class="textarea">现场走线与图纸不一致，已拍照留痕。</textarea></div><button class="btn" data-action="submit-issue">提交并派单</button></section>`
   },
   collab:{
     title:'协同中心',
@@ -86,7 +87,7 @@ const pages={
     title:'经营成本',
     html:`<section class="card"><div class="section-title"><h2>经营看板</h2><a>财经同步</a></div><div class="metrics"><div class="metric"><span>合同总额</span><b>12.8M</b><em>USD</em></div><div class="metric"><span>回款率</span><b>68%</b><em>+4.2pp</em></div><div class="metric"><span>毛利率</span><b>18.6%</b><em style="color:#ff8f1f">低于目标</em></div></div></section>
     <section class="card"><div class="section-title"><h2>成本异常</h2><a>预算校验</a></div>${cost('人力成本','3.42M','预算占用 76%')}${cost('分包成本','2.18M','超预算 4.8%')}${cost('差旅报销','0.48M','待审批 9 单')}${cost('物料成本','4.26M','正常')}</section>
-    <section class="card"><div class="section-title"><h2>费用审批</h2></div><div class="list">${item('差旅报销审批','OCR 识别 6 张票据，预算充足','6','¥')}${item('现场杂费审批','超预算，需要补充说明','1','!')}</div><button class="btn">批量审批</button></section>`
+    <section class="card"><div class="section-title"><h2>费用审批</h2></div><div class="list">${item('差旅报销审批','OCR 识别 6 张票据，预算充足','6','¥')}${item('现场杂费审批','超预算，需要补充说明','1','!')}</div><button class="btn" data-action="approve-cost">批量审批</button></section>`
   },
   knowledge:{
     title:'知识库',
@@ -95,14 +96,51 @@ const pages={
     <section class="card"><div class="section-title"><h2>全局能力</h2></div><div class="sync-panel"><div class="sync-row"><span>本地加密缓存</span><b>开启</b></div><div class="sync-row"><span>多语言</span><b>中 / EN</b></div><div class="sync-row"><span>操作留痕</span><b>100%</b></div></div></section>`
   }
 };
-function project(name,stage,level,percent,width,color,sub){return `<div class="card" style="box-shadow:none;margin:0;background:#fbfdff"><div class="project-head"><h3>${name}</h3><span class="tag ${color}">${level}</span></div><div class="item-sub">${stage} · ${sub}</div><div class="progress"><i style="width:${width}%"></i></div><div class="item-sub">整体进度 ${percent}</div></div>`}
-function item(t,s,b,i){return `<div class="item"><div class="item-icon">${i}</div><div><div class="item-title">${t}</div><div class="item-sub">${s}</div></div>${b?`<div class="badge">${b}</div>`:'›'}</div>`}
-function task(t,s,i){return `<div class="task"><div class="ico">${i}</div><b>${t}</b><span>${s}</span></div>`}
-function cost(t,a,s){return `<div class="cost-row"><div><b>${t}</b><div class="item-sub">${s}</div></div><div class="amount">${a}</div></div>`}
-function doc(t,s){return `<div class="doc"><i>▤</i><div><b>${t}</b><div class="item-sub">${s}</div></div></div>`}
+function project(name,stage,level,percent,width,color,sub){return `<div class="card pressable" data-action="project" data-title="${name}" data-sub="${stage} · ${sub}" style="box-shadow:none;margin:0;background:#fbfdff"><div class="project-head"><h3>${name}</h3><span class="tag ${color}">${level}</span></div><div class="item-sub">${stage} · ${sub}</div><div class="progress"><i style="width:${width}%"></i></div><div class="item-sub">整体进度 ${percent}</div></div>`}
+function item(t,s,b,i){return `<div class="item" data-action="item" data-title="${t}" data-sub="${s}"><div class="item-icon">${i}</div><div><div class="item-title">${t}</div><div class="item-sub">${s}</div></div>${b?`<div class="badge">${b}</div>`:'›'}</div>`}
+function task(t,s,i){return `<div class="task" data-action="task" data-title="${t}" data-sub="${s}"><div class="ico">${i}</div><b>${t}</b><span>${s}</span></div>`}
+function cost(t,a,s){return `<div class="cost-row" data-action="cost" data-title="${t}" data-sub="${s}" data-amount="${a}"><div><b>${t}</b><div class="item-sub">${s}</div></div><div class="amount">${a}</div></div>`}
+function doc(t,s){return `<div class="doc" data-action="doc" data-title="${t}" data-sub="${s}"><i>▤</i><div><b>${t}</b><div class="item-sub">${s}</div></div></div>`}
 function render(tab){document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x.dataset.tab===tab));title.textContent=pages[tab].title;content.innerHTML=pages[tab].html}
 document.getElementById('tabs').addEventListener('click',e=>{const btn=e.target.closest('.tab');if(btn)render(btn.dataset.tab)});
-document.getElementById('scanBtn').addEventListener('click',()=>{render('field');setTimeout(()=>alert('扫码入口：支持设备条码、物料签收、站点二维码核验'),50)});
+function toast(msg){document.querySelector('.toast')?.remove();const el=document.createElement('div');el.className='toast';el.textContent=msg;document.querySelector('.phone').appendChild(el);setTimeout(()=>el.remove(),1800)}
+function sheet(title,sub,rows=[],actions=true){
+  document.querySelector('.sheet-mask')?.remove();
+  const mask=document.createElement('div');
+  mask.className='sheet-mask';
+  mask.innerHTML=`<div class="sheet"><h3>${title}</h3><p>${sub||'查看详情并继续处理。'}</p><div class="mini-tabs"><button class="active">详情</button><button>流程</button><button>附件</button><button>日志</button></div><div class="detail-list">${rows.map(r=>`<div><span>${r[0]}</span><b>${r[1]}</b></div>`).join('')}</div>${actions?'<div class="sheet-actions"><button class="btn ghost" data-action="close-sheet">稍后处理</button><button class="btn" data-action="sheet-primary">继续办理</button></div>':'<div class="sheet-actions"><button class="btn" data-action="close-sheet">知道了</button></div>'}</div>`;
+  document.querySelector('.phone').appendChild(mask);
+}
+function defaultRows(type,amount){
+  if(type==='project')return [['当前阶段','执行中'],['整体进度','82%'],['待办事项','4'],['同步状态','已缓存']];
+  if(type==='cost')return [['金额',amount||'-'],['预算校验','通过'],['审批节点','PM → 财务'],['发票 OCR','已识别']];
+  if(type==='doc')return [['离线状态','已缓存'],['版本','最新版'],['权限','可查看'],['水印','已开启']];
+  return [['来源系统','ISDP / WeLink'],['优先级','高'],['截止时间','今日 18:00'],['处理方式','移动端闭环']];
+}
+content.addEventListener('click',e=>{
+  const el=e.target.closest('[data-action]');
+  if(!el)return;
+  const action=el.dataset.action;
+  if(action==='switch'){render(el.dataset.target);toast('已进入现场作业');return;}
+  if(action==='weekly'){toast('正在生成本周项目周报');return;}
+  if(action==='risk'){sheet('风险总览','红黄绿风险矩阵已按项目聚合。',[['高风险','3 项'],['中风险','12 项'],['临近到期','5 项']],true);return;}
+  if(action==='approve'){sheet('待审批中心','支持批量同意、驳回和补充意见。',[['变更审批','8'],['费用审批','6'],['验收确认','12']],true);return;}
+  if(action==='submit-issue'){toast('问题工单已本地暂存，联网后自动同步');return;}
+  if(action==='approve-cost'){toast('已批量审批 6 单，1 单需补充说明');return;}
+  if(action==='more'){sheet(el.dataset.title||'更多','更多功能入口将在二期开放。',[['周报','可用'],['风险','可用'],['巡检','可用'],['审批','可用']],false);return;}
+  if(action==='project'||action==='item'||action==='task'||action==='cost'||action==='doc'){
+    sheet(el.dataset.title,el.dataset.sub,defaultRows(action,el.dataset.amount),true);return;
+  }
+});
+document.querySelector('.phone').addEventListener('click',e=>{
+  const action=e.target.closest('[data-action]')?.dataset.action;
+  if(action==='close-sheet'){document.querySelector('.sheet-mask')?.remove();}
+  if(action==='sheet-primary'){document.querySelector('.sheet-mask')?.remove();toast('已进入办理流程');}
+  if(e.target.classList.contains('sheet-mask'))e.target.remove();
+});
+document.getElementById('backBtn').addEventListener('click',()=>toast('当前为原型首页层级'));
+document.getElementById('moreBtn').addEventListener('click',()=>sheet('全局设置','消息推送、离线缓存、账号切换与权限查看。',[['离线缓存','128MB'],['消息免打扰','关闭'],['账号权限','项目经理'],['版本','v1.0.0']],true));
+document.getElementById('scanBtn').addEventListener('click',()=>{render('field');setTimeout(()=>sheet('扫码核验','支持设备条码、物料签收、站点二维码核验。',[['扫码结果','S/N HW-AX-20260530'],['匹配任务','Riyadh-DC-01 设备上架'],['校验状态','通过'],['同步方式','离线暂存']],true),80)});
 render('home');
 </script>
 </body>

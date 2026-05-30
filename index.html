@@ -188,7 +188,7 @@ document.querySelector('.phone').addEventListener('click',e=>{
   const messages={
     'update-progress':'进度已更新并同步项目台账','report-risk':'风险已上报并通知相关责任人','append-log':'已打开处理日志编辑',
     'approve-ok':'审批已通过','approve-reject':'已进入驳回原因填写','append-comment':'已打开补充意见',
-    'start-field':'已进入现场作业流程','take-photo':'已打开拍照留痕','save-draft':'已暂存草稿',
+    'start-field':'已进入现场作业流程','scan-check':'已打开扫码核验','material-receive':'已进入物料签收','site-qr':'已打开站点二维码核验','take-photo':'已打开拍照留痕','save-draft':'已暂存草稿',
     'approve-cost-ok':'费用审批已通过','preview-doc':'已打开文档预览','cache-doc':'已加入离线缓存','share-doc':'已生成受控分享链接',
     'confirm-issue':'问题工单已创建并派单','confirm-cost':'批量审批已提交','refresh-data':'数据已刷新','sync-cache':'离线缓存已同步','export-weekly':'周报已生成'
   };
@@ -197,7 +197,7 @@ document.querySelector('.phone').addEventListener('click',e=>{
 });
 document.getElementById('profileBtn').addEventListener('click',()=>sheet('个人中心','项目经理 / 交付现场负责人',[['姓名','李明'],['角色','项目经理'],['区域','中东代表处'],['待同步','3 条'],['权限','项目/成本/审批可见']],true));
 document.getElementById('moreBtn').addEventListener('click',()=>actionSheet('全局操作',[{text:'刷新项目数据',action:'refresh-data'},{text:'同步离线缓存',action:'sync-cache'},{text:'账号与权限',action:'open-detail'}]));
-document.getElementById('scanBtn').addEventListener('click',()=>{render('field');setTimeout(()=>detailPage('task','扫码核验','支持设备条码、物料签收、站点二维码核验。'),80)});
+document.getElementById('scanBtn').addEventListener('click',()=>actionSheet('现场快捷操作',[{text:'扫码核验',action:'scan-check'},{text:'物料签收',action:'material-receive'},{text:'站点二维码',action:'site-qr'},{text:'EHS拍照留痕',action:'take-photo'}]));
 render('home');
 </script>
 </body>

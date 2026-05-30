@@ -152,7 +152,7 @@ function actionSheet(titleText,list,placement='top'){
   document.querySelector('.mask')?.remove();
   const m=document.createElement('div');
   m.className='mask menu';
-  m.innerHTML=`<div class="float-menu ${placement}"><h3>${titleText}</h3><div class="action-list">${list.map(a=>`<button data-action="${a.action}">${a.text}</button>`).join('')}<button data-action="close-mask">取消</button></div></div>`;
+  m.innerHTML=`<div class="float-menu ${placement}"><h3>${titleText}</h3><div class="action-list">${list.map(a=>`<button data-action="${a.action}">${a.text}</button>`).join('')}</div></div>`;
   document.querySelector('.phone').appendChild(m);
 }
 function confirmDialog(titleText,subText,okAction){

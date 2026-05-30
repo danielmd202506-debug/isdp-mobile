@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>ISDP Mobile</title>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
   <style>
     :root{
       --adm-color-primary:#1677ff;--adm-color-success:#00b578;--adm-color-warning:#ff8f1f;--adm-color-danger:#ff3141;
@@ -28,7 +29,7 @@
     .tabs{height:68px;background:#fff;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(5,1fr);padding-bottom:env(safe-area-inset-bottom)}.tab{border:0;background:#fff;color:#6b7280;display:grid;justify-items:center;align-content:center;gap:3px;font-size:11px}.tab i{font-style:normal;font-size:22px}.tab.active{color:var(--adm-color-primary);font-weight:800}
     .sync-panel{display:grid;gap:8px}.sync-row{display:flex;justify-content:space-between;align-items:center;background:#f8fafc;border-radius:10px;padding:9px 10px;font-size:13px}.sync-row b{color:#1677ff}
     .cost-row{display:grid;grid-template-columns:1fr auto;gap:8px;padding:10px 0;border-bottom:1px solid var(--line)}.cost-row:last-child{border-bottom:0}.amount{font-weight:900}.doc{display:flex;align-items:center;gap:10px;padding:12px;border:1px solid var(--line);border-radius:12px;margin-bottom:8px;background:#fff}.doc i{font-style:normal;font-size:24px}.hidden{display:none}
-    [data-action]{cursor:pointer}.pressable:active,.item:active,.task:active,.doc:active,.cost-row:active,.q:active{transform:scale(.985);opacity:.88}.toast{position:absolute;left:50%;bottom:92px;transform:translateX(-50%);max-width:86%;padding:10px 14px;border-radius:999px;background:rgba(17,24,39,.92);color:#fff;font-size:13px;z-index:20;box-shadow:0 10px 30px rgba(0,0,0,.24)}.sheet-mask{position:absolute;inset:0;background:rgba(15,23,42,.42);z-index:18;display:grid;align-items:end}.sheet{background:#fff;border-radius:18px 18px 0 0;padding:16px 14px 22px;max-height:72vh;overflow:auto}.sheet h3{margin:0 0 8px;font-size:18px}.sheet p{margin:0 0 12px;color:var(--weak);font-size:13px}.sheet-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.detail-list{display:grid;gap:8px;margin-top:10px}.detail-list div{display:flex;justify-content:space-between;background:#f8fafc;border-radius:10px;padding:9px 10px;font-size:13px}.detail-list b{color:#111827}.mini-tabs{display:flex;gap:8px;overflow:auto;margin:8px 0 12px}.mini-tabs button{border:0;border-radius:999px;background:#eef4ff;color:#1677ff;padding:7px 11px;font-weight:800}.mini-tabs button.active{background:#1677ff;color:#fff}
+    [data-action]{cursor:pointer}.pressable:active,.item:active,.task:active,.doc:active,.cost-row:active,.q:active{transform:scale(.985);opacity:.88}.avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#1677ff,#00b7ff);color:#fff;font-size:14px;font-weight:900;display:grid;place-items:center}.toast{position:absolute;left:50%;bottom:92px;transform:translateX(-50%);max-width:86%;padding:10px 14px;border-radius:999px;background:rgba(17,24,39,.92);color:#fff;font-size:13px;z-index:30;box-shadow:0 10px 30px rgba(0,0,0,.24)}.sheet-mask,.mask{position:absolute;inset:0;background:rgba(15,23,42,.42);z-index:18;display:grid}.sheet-mask{align-items:end}.mask{place-items:center;padding:22px}.mask.bottom{align-items:end;place-items:initial;padding:0}.sheet{background:#fff;border-radius:18px;padding:16px 14px 22px;max-height:72vh;overflow:auto;width:100%}.bottom .sheet{border-radius:18px 18px 0 0}.sheet h3,.page-view h3,.confirm-box h3{margin:0 0 8px;font-size:18px}.sheet p,.page-view p,.confirm-box p{margin:0 0 12px;color:var(--weak);font-size:13px}.sheet-actions,.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.actions.three{grid-template-columns:repeat(3,1fr)}.detail-list,.rows{display:grid;gap:8px;margin-top:10px}.detail-list div,.rows div{display:flex;justify-content:space-between;background:#f8fafc;border-radius:10px;padding:9px 10px;font-size:13px}.detail-list b,.rows b{color:#111827}.mini-tabs{display:flex;gap:8px;overflow:auto;margin:8px 0 12px}.mini-tabs button{border:0;border-radius:999px;background:#eef4ff;color:#1677ff;padding:7px 11px;font-weight:800}.mini-tabs button.active{background:#1677ff;color:#fff}.page-view{position:absolute;inset:0;background:var(--bg);z-index:16;display:grid;grid-template-rows:auto 1fr}.page-nav{height:54px;background:#fff;display:grid;grid-template-columns:44px 1fr 44px;align-items:center;padding:0 12px;border-bottom:1px solid var(--line)}.page-nav button{border:0;background:transparent;font-size:22px;color:#1f2937}.page-nav h2{margin:0;text-align:center;font-size:17px}.page-body{overflow:auto;padding:12px 12px 88px}.timeline{display:grid;gap:8px;margin-top:12px}.timeline div{display:grid;grid-template-columns:18px 1fr;gap:8px}.timeline i{width:10px;height:10px;border-radius:50%;background:#1677ff;margin-top:5px}.timeline span{font-size:13px;color:var(--weak)}.action-list{display:grid;gap:8px}.action-list button{height:44px;border:0;border-radius:10px;background:#f8fafc;color:#111827;text-align:left;padding:0 12px;font-weight:700}.confirm-box{background:#fff;border-radius:18px;padding:18px;width:100%;max-width:340px}
     @media(max-width:360px){.metrics{grid-template-columns:repeat(2,1fr)}.quick{grid-template-columns:repeat(4,1fr);gap:6px}.q i{width:38px;height:38px}.phone{height:100vh}}
   </style>
 </head>
@@ -37,18 +38,18 @@
   <div class="app">
     <div>
       <div class="status"></div>
-      <div class="nav"><button id="backBtn">‹</button><h1 id="title">项目总览</h1><button id="moreBtn">⋯</button></div>
+      <div class="nav"><button id="profileBtn"><span class="avatar">PM</span></button><h1 id="title">项目总览</h1><button id="moreBtn"><i class="ri-more-2-fill"></i></button></div>
     </div>
     <main class="content" id="content"></main>
     <nav class="tabs" id="tabs">
-      <button class="tab active" data-tab="home"><i>⌂</i><span>首页</span></button>
-      <button class="tab" data-tab="field"><i>▣</i><span>现场作业</span></button>
-      <button class="tab" data-tab="collab"><i>☷</i><span>协同中心</span></button>
-      <button class="tab" data-tab="cost"><i>¥</i><span>经营成本</span></button>
-      <button class="tab" data-tab="knowledge"><i>◇</i><span>知识库</span></button>
+      <button class="tab active" data-tab="home"><i class="ri-dashboard-3-line"></i><span>首页</span></button>
+      <button class="tab" data-tab="field"><i class="ri-tools-line"></i><span>现场作业</span></button>
+      <button class="tab" data-tab="collab"><i class="ri-team-line"></i><span>协同中心</span></button>
+      <button class="tab" data-tab="cost"><i class="ri-funds-line"></i><span>经营成本</span></button>
+      <button class="tab" data-tab="knowledge"><i class="ri-folder-3-line"></i><span>知识库</span></button>
     </nav>
   </div>
-  <button class="scan" id="scanBtn">⌗</button>
+  <button class="scan" id="scanBtn"><i class="ri-qr-scan-2-line"></i></button>
 </div>
 <script>
 const content=document.getElementById('content');
@@ -61,7 +62,7 @@ const pages={
       <div class="metric"><span>在管项目</span><b>18</b><em>+2 本周</em></div><div class="metric"><span>逾期里程碑</span><b>5</b><em style="color:#ff3141">需处理</em></div><div class="metric"><span>待审批</span><b>26</b><em>批量处理</em></div>
       <div class="metric"><span>EHS隐患</span><b>8</b><em style="color:#ff8f1f">高风险 2</em></div><div class="metric"><span>成本超支</span><b>3</b><em style="color:#ff3141">红色预警</em></div><div class="metric"><span>今日到期</span><b>11</b><em>站点任务</em></div>
     </div></section>
-    <section class="card"><div class="section-title"><h2>快捷入口</h2><a data-action="more" data-title="快捷入口">全部</a></div><div class="quick"><div class="q" data-action="weekly"><i>▤</i><span>周报</span></div><div class="q" data-action="risk"><i>!</i><span>风险</span></div><div class="q" data-action="switch" data-target="field"><i>⌕</i><span>巡检</span></div><div class="q" data-action="approve"><i>☑</i><span>审批</span></div></div></section>
+    <section class="card"><div class="section-title"><h2>快捷入口</h2><a data-action="more" data-title="快捷入口">全部</a></div><div class="quick"><div class="q" data-action="weekly"><i class="ri-file-chart-line"></i><span>周报</span></div><div class="q" data-action="risk"><i class="ri-error-warning-line"></i><span>风险</span></div><div class="q" data-action="switch" data-target="field"><i class="ri-shield-check-line"></i><span>巡检</span></div><div class="q" data-action="approve"><i class="ri-checkbox-circle-line"></i><span>审批</span></div></div></section>
     <section class="card"><div class="section-title"><h2>重点项目</h2><a>筛选</a></div><div class="project">
       ${project('沙特 Riyadh 数据中心交付','执行中','S级','82%',82,'green','待处理问题 4 / 里程碑 2天后到期')}
       ${project('Dubai Core Site 扩容','验收中','A级','64%',64,'warn','EHS 整改 2 / 验收材料待补齐')}
@@ -97,10 +98,14 @@ const pages={
   }
 };
 function project(name,stage,level,percent,width,color,sub){return `<div class="card pressable" data-action="project" data-title="${name}" data-sub="${stage} · ${sub}" style="box-shadow:none;margin:0;background:#fbfdff"><div class="project-head"><h3>${name}</h3><span class="tag ${color}">${level}</span></div><div class="item-sub">${stage} · ${sub}</div><div class="progress"><i style="width:${width}%"></i></div><div class="item-sub">整体进度 ${percent}</div></div>`}
-function item(t,s,b,i){return `<div class="item" data-action="item" data-title="${t}" data-sub="${s}"><div class="item-icon">${i}</div><div><div class="item-title">${t}</div><div class="item-sub">${s}</div></div>${b?`<div class="badge">${b}</div>`:'›'}</div>`}
-function task(t,s,i){return `<div class="task" data-action="task" data-title="${t}" data-sub="${s}"><div class="ico">${i}</div><b>${t}</b><span>${s}</span></div>`}
+function iconFor(i){
+  const map={'☑':'ri-checkbox-circle-line','!':'ri-error-warning-line','▤':'ri-file-chart-line','▣':'ri-tools-line','⌗':'ri-qr-scan-2-line','◉':'ri-camera-lens-line','☷':'ri-customer-service-2-line','✎':'ri-edit-box-line','◷':'ri-time-line','☰':'ri-message-3-line','◇':'ri-folder-3-line','¥':'ri-money-cny-circle-line','⌕':'ri-search-eye-line'};
+  return i&&i.startsWith('ri-')?i:(map[i]||'ri-apps-2-line');
+}
+function item(t,s,b,i){return `<div class="item" data-action="item" data-title="${t}" data-sub="${s}"><div class="item-icon"><i class="${iconFor(i)}"></i></div><div><div class="item-title">${t}</div><div class="item-sub">${s}</div></div>${b?`<div class="badge">${b}</div>`:'<i class="ri-arrow-right-s-line"></i>'}</div>`}
+function task(t,s,i){return `<div class="task" data-action="task" data-title="${t}" data-sub="${s}"><div class="ico"><i class="${iconFor(i)}"></i></div><b>${t}</b><span>${s}</span></div>`}
 function cost(t,a,s){return `<div class="cost-row" data-action="cost" data-title="${t}" data-sub="${s}" data-amount="${a}"><div><b>${t}</b><div class="item-sub">${s}</div></div><div class="amount">${a}</div></div>`}
-function doc(t,s){return `<div class="doc" data-action="doc" data-title="${t}" data-sub="${s}"><i>▤</i><div><b>${t}</b><div class="item-sub">${s}</div></div></div>`}
+function doc(t,s){return `<div class="doc" data-action="doc" data-title="${t}" data-sub="${s}"><i class="ri-file-text-line"></i><div><b>${t}</b><div class="item-sub">${s}</div></div></div>`}
 function render(tab){document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x.dataset.tab===tab));title.textContent=pages[tab].title;content.innerHTML=pages[tab].html}
 document.getElementById('tabs').addEventListener('click',e=>{const btn=e.target.closest('.tab');if(btn)render(btn.dataset.tab)});
 function toast(msg){document.querySelector('.toast')?.remove();const el=document.createElement('div');el.className='toast';el.textContent=msg;document.querySelector('.phone').appendChild(el);setTimeout(()=>el.remove(),1800)}
@@ -108,7 +113,7 @@ function sheet(title,sub,rows=[],actions=true){
   document.querySelector('.sheet-mask')?.remove();
   const mask=document.createElement('div');
   mask.className='sheet-mask';
-  mask.innerHTML=`<div class="sheet"><h3>${title}</h3><p>${sub||'查看详情并继续处理。'}</p><div class="mini-tabs"><button class="active">详情</button><button>流程</button><button>附件</button><button>日志</button></div><div class="detail-list">${rows.map(r=>`<div><span>${r[0]}</span><b>${r[1]}</b></div>`).join('')}</div>${actions?'<div class="sheet-actions"><button class="btn ghost" data-action="close-sheet">稍后处理</button><button class="btn" data-action="sheet-primary">继续办理</button></div>':'<div class="sheet-actions"><button class="btn" data-action="close-sheet">知道了</button></div>'}</div>`;
+  mask.innerHTML=`<div class="sheet"><h3>${title}</h3><p>${sub||'查看详情并继续处理。'}</p><div class="mini-tabs"><button class="active">详情</button><button>流程</button><button>附件</button><button>日志</button></div><div class="detail-list">${rows.map(r=>`<div><span>${r[0]}</span><b>${r[1]}</b></div>`).join('')}</div>${actions?'<div class="sheet-actions"><button class="btn ghost" data-action="close-sheet">关闭</button><button class="btn" data-action="open-detail">查看详情</button></div>':'<div class="sheet-actions"><button class="btn" data-action="close-sheet">知道了</button></div>'}</div>`;
   document.querySelector('.phone').appendChild(mask);
 }
 function defaultRows(type,amount){
@@ -117,30 +122,75 @@ function defaultRows(type,amount){
   if(type==='doc')return [['离线状态','已缓存'],['版本','最新版'],['权限','可查看'],['水印','已开启']];
   return [['来源系统','ISDP / WeLink'],['优先级','高'],['截止时间','今日 18:00'],['处理方式','移动端闭环']];
 }
+function timeline(items){return `<div class="timeline">${items.map(x=>`<div><i></i><span>${x}</span></div>`).join('')}</div>`}
+function actions(list){return `<div class="actions ${list.length===3?'three':''}">${list.map(a=>`<button class="${a.primary?'btn':'btn ghost'}" data-action="${a.action}">${a.text}</button>`).join('')}</div>`}
+function detailConfig(type){
+  const configs={
+    project:{rows:[['当前阶段','执行中'],['整体进度','82%'],['风险等级','高'],['同步状态','已缓存']],steps:['项目启动','物料到货','现场安装 75%','调测待客户确认','验收计划待锁定'],actions:[{text:'更新进度',action:'update-progress',primary:true},{text:'上报风险',action:'report-risk'},{text:'补充日志',action:'append-log'}]},
+    item:{rows:[['来源','ISDP / WeLink'],['优先级','高'],['截止','今日 18:00'],['处理人','项目经理']],steps:['任务生成','现场补充资料','PM 审批','同步项目台账'],actions:[{text:'同意',action:'approve-ok',primary:true},{text:'驳回',action:'approve-reject'},{text:'补充意见',action:'append-comment'}]},
+    task:{rows:[['作业模式','离线可用'],['定位','GPS 已开启'],['附件','照片/视频/语音'],['同步','联网后自动']],steps:['进入现场','采集证据','提交结果','自动同步'],actions:[{text:'开始作业',action:'start-field',primary:true},{text:'拍照留痕',action:'take-photo'},{text:'暂存草稿',action:'save-draft'}]},
+    cost:{rows:[['金额','待校验'],['预算','自动校验'],['节点','PM → 财务'],['票据','OCR 已识别']],steps:['读取预算','校验票据','PM 审批','财务复核'],actions:[{text:'通过审批',action:'approve-cost-ok',primary:true},{text:'驳回',action:'approve-reject'},{text:'查看票据',action:'preview-doc'}]},
+    doc:{rows:[['版本','最新版'],['离线','已缓存'],['权限','可查看'],['水印','已开启']],steps:['权限校验','打开预览','记录访问日志','离线缓存'],actions:[{text:'预览',action:'preview-doc',primary:true},{text:'离线缓存',action:'cache-doc'},{text:'分享链接',action:'share-doc'}]}
+  };
+  return configs[type]||configs.item;
+}
+function detailPage(type,titleText,subText){
+  document.querySelector('.page-view')?.remove();
+  const cfg=detailConfig(type);
+  const view=document.createElement('div');
+  view.className='page-view';
+  view.innerHTML=`<div class="page-nav"><button data-action="page-back"><i class="ri-arrow-left-s-line"></i></button><h2>${titleText||'详情'}</h2><button data-action="page-more"><i class="ri-more-2-fill"></i></button></div><div class="page-body"><section class="card"><h3>${titleText||'详情'}</h3><p>${subText||'查看详情并处理现场闭环。'}</p><div class="rows">${cfg.rows.map(r=>`<div><span>${r[0]}</span><b>${r[1]}</b></div>`).join('')}</div></section><section class="card"><div class="section-title"><h2>处理流</h2><a>可追溯</a></div>${timeline(cfg.steps)}</section><section class="card">${actions(cfg.actions)}</section></div>`;
+  document.querySelector('.phone').appendChild(view);
+}
+function actionSheet(titleText,list){
+  document.querySelector('.mask')?.remove();
+  const m=document.createElement('div');
+  m.className='mask bottom';
+  m.innerHTML=`<div class="sheet"><h3>${titleText}</h3><div class="action-list">${list.map(a=>`<button data-action="${a.action}">${a.text}</button>`).join('')}<button data-action="close-mask">取消</button></div></div>`;
+  document.querySelector('.phone').appendChild(m);
+}
+function confirmDialog(titleText,subText,okAction){
+  document.querySelector('.mask')?.remove();
+  const m=document.createElement('div');
+  m.className='mask';
+  m.innerHTML=`<div class="confirm-box"><h3>${titleText}</h3><p>${subText}</p><div class="actions"><button class="btn ghost" data-action="close-mask">取消</button><button class="btn" data-action="${okAction}">确认</button></div></div>`;
+  document.querySelector('.phone').appendChild(m);
+}
 content.addEventListener('click',e=>{
   const el=e.target.closest('[data-action]');
   if(!el)return;
   const action=el.dataset.action;
   if(action==='switch'){render(el.dataset.target);toast('已进入现场作业');return;}
-  if(action==='weekly'){toast('正在生成本周项目周报');return;}
-  if(action==='risk'){sheet('风险总览','红黄绿风险矩阵已按项目聚合。',[['高风险','3 项'],['中风险','12 项'],['临近到期','5 项']],true);return;}
-  if(action==='approve'){sheet('待审批中心','支持批量同意、驳回和补充意见。',[['变更审批','8'],['费用审批','6'],['验收确认','12']],true);return;}
-  if(action==='submit-issue'){toast('问题工单已本地暂存，联网后自动同步');return;}
-  if(action==='approve-cost'){toast('已批量审批 6 单，1 单需补充说明');return;}
-  if(action==='more'){sheet(el.dataset.title||'更多','更多功能入口将在二期开放。',[['周报','可用'],['风险','可用'],['巡检','可用'],['审批','可用']],false);return;}
+  if(action==='weekly'){detailPage('doc','项目周报','自动汇总项目进度、风险、成本和现场问题');return;}
+  if(action==='risk'){detailPage('item','风险总览','红黄绿风险矩阵已按项目聚合，可上报和闭环');return;}
+  if(action==='approve'){detailPage('item','待审批中心','变更、费用、验收确认统一处理');return;}
+  if(action==='submit-issue'){confirmDialog('提交问题单','问题单将本地暂存并在联网后同步派单。','confirm-issue');return;}
+  if(action==='approve-cost'){confirmDialog('批量审批费用','将通过 6 单，另有 1 单需要补充说明。','confirm-cost');return;}
+  if(action==='more'){actionSheet(el.dataset.title||'更多操作',[{text:'刷新项目数据',action:'refresh-data'},{text:'同步离线缓存',action:'sync-cache'},{text:'导出周报',action:'export-weekly'}]);return;}
   if(action==='project'||action==='item'||action==='task'||action==='cost'||action==='doc'){
-    sheet(el.dataset.title,el.dataset.sub,defaultRows(action,el.dataset.amount),true);return;
+    detailPage(action,el.dataset.title,el.dataset.sub);return;
   }
 });
 document.querySelector('.phone').addEventListener('click',e=>{
   const action=e.target.closest('[data-action]')?.dataset.action;
   if(action==='close-sheet'){document.querySelector('.sheet-mask')?.remove();}
-  if(action==='sheet-primary'){document.querySelector('.sheet-mask')?.remove();toast('已进入办理流程');}
-  if(e.target.classList.contains('sheet-mask'))e.target.remove();
+  if(action==='open-detail'){const titleText=document.querySelector('.sheet h3')?.textContent||'详情';document.querySelector('.sheet-mask')?.remove();detailPage('item',titleText,'查看详情并处理现场闭环。');}
+  if(action==='page-back'){document.querySelector('.page-view')?.remove();return;}
+  if(action==='page-more'){actionSheet('更多操作',[{text:'刷新数据',action:'refresh-data'},{text:'离线缓存',action:'sync-cache'},{text:'分享给项目组',action:'share-doc'}]);return;}
+  if(action==='close-mask'){document.querySelector('.mask')?.remove();return;}
+  const messages={
+    'update-progress':'进度已更新并同步项目台账','report-risk':'风险已上报并通知相关责任人','append-log':'已打开处理日志编辑',
+    'approve-ok':'审批已通过','approve-reject':'已进入驳回原因填写','append-comment':'已打开补充意见',
+    'start-field':'已进入现场作业流程','take-photo':'已打开拍照留痕','save-draft':'已暂存草稿',
+    'approve-cost-ok':'费用审批已通过','preview-doc':'已打开文档预览','cache-doc':'已加入离线缓存','share-doc':'已生成受控分享链接',
+    'confirm-issue':'问题工单已创建并派单','confirm-cost':'批量审批已提交','refresh-data':'数据已刷新','sync-cache':'离线缓存已同步','export-weekly':'周报已生成'
+  };
+  if(messages[action]){document.querySelector('.mask')?.remove();toast(messages[action]);return;}
+  if(e.target.classList.contains('sheet-mask')||e.target.classList.contains('mask'))e.target.remove();
 });
-document.getElementById('backBtn').addEventListener('click',()=>toast('当前为原型首页层级'));
-document.getElementById('moreBtn').addEventListener('click',()=>sheet('全局设置','消息推送、离线缓存、账号切换与权限查看。',[['离线缓存','128MB'],['消息免打扰','关闭'],['账号权限','项目经理'],['版本','v1.0.0']],true));
-document.getElementById('scanBtn').addEventListener('click',()=>{render('field');setTimeout(()=>sheet('扫码核验','支持设备条码、物料签收、站点二维码核验。',[['扫码结果','S/N HW-AX-20260530'],['匹配任务','Riyadh-DC-01 设备上架'],['校验状态','通过'],['同步方式','离线暂存']],true),80)});
+document.getElementById('profileBtn').addEventListener('click',()=>sheet('个人中心','项目经理 / 交付现场负责人',[['姓名','李明'],['角色','项目经理'],['区域','中东代表处'],['待同步','3 条'],['权限','项目/成本/审批可见']],true));
+document.getElementById('moreBtn').addEventListener('click',()=>actionSheet('全局操作',[{text:'刷新项目数据',action:'refresh-data'},{text:'同步离线缓存',action:'sync-cache'},{text:'账号与权限',action:'open-detail'}]));
+document.getElementById('scanBtn').addEventListener('click',()=>{render('field');setTimeout(()=>detailPage('task','扫码核验','支持设备条码、物料签收、站点二维码核验。'),80)});
 render('home');
 </script>
 </body>

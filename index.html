@@ -34,11 +34,11 @@
     .status .icons{display:flex;align-items:center;gap:7px;font-size:18px}
     .battery{width:25px;height:12px;border:2px solid #111;border-radius:4px;position:relative}
     .battery:before{content:"";position:absolute;inset:2px;background:#111;border-radius:1px}.battery:after{content:"";position:absolute;right:-5px;top:3px;width:2px;height:6px;background:#111;border-radius:0 2px 2px 0}
-    .topbar{height:72px;background:#fff;display:grid;grid-template-columns:116px 1fr 46px;align-items:center;padding:0 16px}
+    .topbar{height:72px;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 16px;position:relative}
     .user-chip{border:0;background:transparent;display:flex;align-items:center;gap:9px;padding:0;text-align:left;min-width:0}
     .logo{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:#fff;box-shadow:0 4px 16px rgba(11,107,255,.12);border:1px solid #EDF2FA;color:var(--primary);font-size:24px;flex:0 0 auto}
     .user-meta{min-width:0;line-height:1.25}.user-meta b{display:block;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.user-meta span{display:block;color:var(--muted);font-size:11px;white-space:nowrap}
-    .topbar h1{margin:0;text-align:center;font-size:24px;font-weight:600;letter-spacing:0}
+    .topbar h1{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:150px;margin:0;text-align:center;font-size:24px;font-weight:600;letter-spacing:0;pointer-events:none}
     .icon-btn{border:0;background:transparent;color:#111827;font-size:25px;width:42px;height:42px;border-radius:12px;display:grid;place-items:center}
     .content{overflow:auto;padding:0 15px 98px;scrollbar-width:none}.content::-webkit-scrollbar{display:none}
     .search-row{display:grid;grid-template-columns:1fr 56px;gap:10px;margin:0 0 12px}
@@ -66,7 +66,7 @@
     .menu{position:absolute;right:14px;top:118px;width:228px;background:#fff;border:1px solid var(--line);border-radius:13px;padding:8px;box-shadow:0 12px 34px rgba(32,56,96,.14);z-index:42}.menu button{height:42px;width:100%;border:0;background:#fff;border-radius:10px;text-align:left;padding:0 10px;font-weight:800;color:var(--text)}.menu button:active{background:#F3F6FC}
     .toast{position:absolute;left:50%;bottom:92px;transform:translateX(-50%);max-width:86%;padding:10px 14px;border-radius:999px;background:rgba(18,24,38,.92);color:#fff;font-size:13px;z-index:60;box-shadow:0 10px 30px rgba(0,0,0,.22)}
     [data-action]:active,.project-row:active,.metric:active,.q:active,.list-row:active{transform:scale(.985);opacity:.9}
-    @media(max-width:370px){.topbar{grid-template-columns:104px 1fr 42px}.hero h2{font-size:25px}.metrics{gap:6px}.metric b{font-size:21px}.quick{grid-template-columns:repeat(5,1fr);column-gap:2px}.q span{font-size:12px}.project-row{grid-template-columns:64px 1fr}.thumb{height:62px}}
+    @media(max-width:370px){.topbar{padding:0 12px}.topbar h1{width:132px;font-size:22px}.hero h2{font-size:25px}.metrics{gap:6px}.metric b{font-size:21px}.quick{grid-template-columns:repeat(5,1fr);column-gap:2px}.q span{font-size:12px}.project-row{grid-template-columns:64px 1fr}.thumb{height:62px}}
   </style>
 </head>
 <body>

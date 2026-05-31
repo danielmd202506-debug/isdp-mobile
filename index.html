@@ -74,7 +74,7 @@
     <header>
       <div class="status"><span>9:41</span><span class="icons"><i class="ri-bar-chart-fill"></i><i class="ri-wifi-fill"></i><span class="battery"></span></span></div>
       <div class="topbar">
-        <button class="user-chip" id="roleBtn"><span class="user-meta"><b id="userName">Daniel Ma F00888</b><span class="role-line"><span id="roleName">交付经理</span><i class="ri-arrow-down-s-line"></i></span></span></button>
+        <button class="user-chip" id="roleBtn"><span class="user-meta"><b id="userName">Daniel Ma F00888</b><span class="role-line"><span id="roleName">PD/TD</span><i class="ri-arrow-down-s-line"></i></span></span></button>
         <h1 id="title">工作台</h1>
         <button class="icon-btn" id="moreBtn" aria-label="更多"><i class="ri-more-2-fill"></i></button>
       </div>
@@ -92,7 +92,9 @@
 <script>
 const content=document.getElementById('content');
 const titleEl=document.getElementById('title');
-const user={name:'Daniel Ma F00888',role:'交付经理'};
+const user={name:'Daniel Ma F00888',role:'PD/TD'};
+let pendingRole=user.role;
+const roleOptions=[{name:'PD/TD',desc:'项目总负责人（管理 + 技术）'},{name:'TMO/PDRT',desc:'技术方案 + 交付评审（决策层）'},{name:'PMO/DQA',desc:'计划资源 + 质量合规（管控层）'},{name:'TL / 作业员 / 安全员',desc:'现场执行（操作层）'}];
 const projects=[
   {id:'p1',name:'Riyadh 5G Core 交付',customer:'STC Saudi Telecom Company',owner:'张伟',stage:'现场实施',status:'进行中',percent:72,risk:'高',due:'2024-06-30',desc:'设备上架完成 86%，联调脚本待客户窗口确认。'},
   {id:'p2',name:'Dubai Cloud DC 扩容',customer:'Etisalat UAE',owner:'陈璐',stage:'客户验收',status:'验收中',percent:88,risk:'中',due:'2024-06-25',desc:'验收材料已提交，客户补充 2 项性能报告。'},
@@ -226,12 +228,14 @@ function batchSheet(){
   const rows=listData.task.map((r,i)=>`<label class="check-item"><input type="checkbox" ${i<2?'checked':''}><span><b>${r.title}</b><p>${r.sub}</p></span><span class="tag">${r.right}</span></label>`).join('');
   sheet('批量处理任务','选择明确任务并填写处理方式，提交后进入对应负责人确认。',`<div class="check-list">${rows}</div><div class="field"><label>处理方式</label><select class="select"><option>确认已处理</option><option>转派责任人</option><option>要求补充材料</option></select></div><div class="field"><label>处理说明</label><textarea class="textarea">请现场主管补充照片后由项目经理复核。</textarea></div>`,[{text:'取消',action:'close',ghost:true},{text:'提交处理',action:'submit-form',message:'批量处理已提交'}]);
 }
+function updateRoleSelection(){document.querySelectorAll('.check-item[data-role]').forEach(item=>{const active=item.dataset.role===pendingRole;item.classList.toggle('active',active);const input=item.querySelector('input');if(input)input.checked=active;})}
 function roleSheet(){
-  sheet('切换角色','角色会影响工作台指标、清单入口和可执行操作。',`<div class="check-list">
-    ${['交付经理','现场主管','文控专员','项目总监'].map((r,i)=>`<label class="check-item"><input type="radio" name="role" ${i===0?'checked':''}><span><b>${r}</b><p>${r==='交付经理'?'项目、任务、风险、验收全量视图':r==='现场主管'?'现场作业、问题、日报优先':r==='文控专员'?'验收资料、签字、归档优先':'经营指标、关键风险和里程碑优先'}</p></span></label>`).join('')}
-  </div>`,[{text:'取消',action:'close',ghost:true},{text:'确认切换',action:'role-confirm'}]);
+  pendingRole=user.role;
+  sheet('\u5207\u6362\u89d2\u8272','\u89d2\u8272\u4f1a\u5f71\u54cd\u5de5\u4f5c\u53f0\u6307\u6807\u3001\u6e05\u5355\u5165\u53e3\u548c\u53ef\u6267\u884c\u64cd\u4f5c\u3002',`<div class="check-list">
+    ${roleOptions.map(r=>`<label class="check-item ${r.name===user.role?'active':''}" data-role="${r.name}"><input type="radio" name="role" ${r.name===user.role?'checked':''}><span><b>${r.name}</b><p>${r.desc}</p></span></label>`).join('')}
+  </div>`,[{text:'\u53d6\u6d88',action:'close',ghost:true},{text:'\u786e\u8ba4\u5207\u6362',action:'role-confirm'}]);
 }
-function menu(items){closeOverlays();const el=document.createElement('div');el.className='menu';el.innerHTML=items.map(i=>`<button data-action="${i.action}">${i.text}</button>`).join('');document.querySelector('.phone').appendChild(el)}
+  function menu(items){closeOverlays();const el=document.createElement('div');el.className='menu';el.innerHTML=items.map(i=>`<button data-action="${i.action}">${i.text}</button>`).join('');document.querySelector('.phone').appendChild(el)}
 function dialog(title,desc,okText='确认'){closeOverlays();const mask=document.createElement('div');mask.className='mask';mask.innerHTML=`<div class="dialog"><h3>${title}</h3><p>${desc}</p><div class="dialog-actions"><button class="btn ghost" data-action="close">取消</button><button class="btn" data-action="submit-form">${okText}</button></div></div>`;document.querySelector('.phone').appendChild(mask)}
 function toast(msg){document.querySelector('.toast')?.remove();const t=document.createElement('div');t.className='toast';t.textContent=msg;document.querySelector('.phone').appendChild(t);setTimeout(()=>t.remove(),1800)}
 function closeOverlays(){document.querySelectorAll('.sheet-mask,.mask,.menu').forEach(x=>x.remove())}
@@ -271,8 +275,9 @@ document.querySelector('.phone').addEventListener('click',e=>{
   if(action==='page-menu'){menu([{text:'刷新业务状态',action:'refresh'},{text:'查看处理记录',action:'history-doc'},{text:'分享给项目组',action:'share'}]);return}
   if(action==='more-page'){const page=document.querySelector('.page');const more=JSON.parse(page?.dataset.more||'[]');menu(more.length?more:[{text:'查看处理记录',action:'history-doc'}]);return}
   if(['progress-form','risk-form','accept-form','task-form','resource-form','document-form','assign-form','attach-form','escalate-form','sign-form','project-form','log-form'].includes(action)){businessForm(action.includes('risk')?'risk-form':action.includes('accept')||action.includes('sign')?'accept-form':action.includes('resource')?'resource-form':action.includes('document')||action.includes('attach')?'document-form':action.includes('progress')||action.includes('project')?'progress-form':'task-form');return}
-  if(action==='role-confirm'){user.role='现场主管';document.getElementById('roleName').textContent=user.role;closeOverlays();toast('已切换为现场主管视图');return}
-  if(action==='submit-form'){const msg=el.dataset.message||'操作已提交';closeOverlays();toast(msg);return}
+  if(action==='role-confirm'){user.role=pendingRole;document.getElementById('roleName').textContent=user.role;closeOverlays();toast('\u5df2\u5207\u6362\u4e3a'+user.role+'\u89c6\u56fe');return}
+  if(el.closest('.check-item[data-role]')){pendingRole=el.closest('.check-item[data-role]').dataset.role;updateRoleSelection();return}
+    if(action==='submit-form'){const msg=el.dataset.message||'操作已提交';closeOverlays();toast(msg);return}
   if(action==='refresh'){closeOverlays();toast('业务状态已刷新');return}
   if(action==='history-doc'){closeOverlays();toast('已打开处理记录');return}
   if(action==='share'){closeOverlays();toast('已分享给项目组');return}

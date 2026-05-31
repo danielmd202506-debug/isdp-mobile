@@ -35,9 +35,9 @@
     .battery{width:25px;height:12px;border:2px solid #111;border-radius:4px;position:relative}
     .battery:before{content:"";position:absolute;inset:2px;background:#111;border-radius:1px}.battery:after{content:"";position:absolute;right:-5px;top:3px;width:2px;height:6px;background:#111;border-radius:0 2px 2px 0}
     .topbar{height:72px;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 16px;position:relative}
-    .user-chip{border:0;background:transparent;display:flex;align-items:center;gap:9px;padding:0;text-align:left;min-width:0}
-    .logo{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:#fff;box-shadow:0 4px 16px rgba(11,107,255,.12);border:1px solid #EDF2FA;color:var(--primary);font-size:24px;flex:0 0 auto}
+    .user-chip{border:0;background:transparent;display:flex;align-items:center;gap:4px;padding:0;text-align:left;min-width:0;max-width:116px}
     .user-meta{min-width:0;line-height:1.25}.user-meta b{display:block;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.user-meta span{display:block;color:var(--muted);font-size:11px;white-space:nowrap}
+    .role-line{display:flex;align-items:center;gap:2px;color:var(--muted);font-size:11px;white-space:nowrap}.role-line i{font-size:14px;color:var(--primary)}
     .topbar h1{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:150px;margin:0;text-align:center;font-size:24px;font-weight:600;letter-spacing:0;pointer-events:none}
     .icon-btn{border:0;background:transparent;color:#111827;font-size:25px;width:42px;height:42px;border-radius:12px;display:grid;place-items:center}
     .content{overflow:auto;padding:0 15px 98px;scrollbar-width:none}.content::-webkit-scrollbar{display:none}
@@ -75,7 +75,7 @@
     <header>
       <div class="status"><span>9:41</span><span class="icons"><i class="ri-bar-chart-fill"></i><i class="ri-wifi-fill"></i><span class="battery"></span></span></div>
       <div class="topbar">
-        <button class="user-chip" id="roleBtn"><span class="logo"><i class="ri-building-4-line"></i></span><span class="user-meta"><b id="userName">王强</b><span id="roleName">交付经理</span></span></button>
+        <button class="user-chip" id="roleBtn"><span class="user-meta"><b id="userName">王强</b><span class="role-line"><span id="roleName">交付经理</span><i class="ri-arrow-down-s-line"></i></span></span></button>
         <h1 id="title">工作台</h1>
         <button class="icon-btn" id="moreBtn" aria-label="更多"><i class="ri-more-2-fill"></i></button>
       </div>
